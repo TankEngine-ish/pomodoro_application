@@ -33,7 +33,7 @@ while true; do
     case $action in
         "Start")
             # Schedule tasks
-            (sleep 60; play -q $music_file fade 5) &
+            (sleep 40; play -q $music_file fade 5) &
             show_countdown 60 "Time remaining"
             zenity --info --text="Break time! Take a 5-minute break."
             show_countdown 300 "Break time remaining"
