@@ -1,13 +1,7 @@
 #!/bin/bash
 
-# Check if Zenity and at are installed
-if ! command -v zenity &> /dev/null || ! command -v at &> /dev/null; then
-    echo "Zenity and at are required but not installed. Please install them and try again."
-    exit 1
-fi
-
 # Initialize variables
-music_file="/path/to/your/music/file.mp3"  # Replace with the path to your music file
+music_file="/home/plamen/Pomodoro_Application/assets/Stormwind.mp3"  # Replace with the path to your music file
 
 # Function to show a countdown timer
 show_countdown() {
@@ -23,6 +17,9 @@ show_countdown() {
     ) | zenity --progress --auto-close
 }
 
+# Function to kill any running play commands when the script exits so you don't hear any music after the script is done
+trap 'pkill -f "play -q $music_file"' EXIT
+
 # Main loop
 while true; do
     # Show main dialog
@@ -36,10 +33,9 @@ while true; do
     case $action in
         "Start")
             # Schedule tasks
-            echo "play -q $music_file" | at now + 25 minutes
-            show_countdown 1500 "Time remaining"
+            (sleep 60; play -q $music_file fade 5) &
+            show_countdown 60 "Time remaining"
             zenity --info --text="Break time! Take a 5-minute break."
-            echo "play -q $music_file" | at now + 5 minutes
             show_countdown 300 "Break time remaining"
             ;;
         "Exit")
