@@ -34,17 +34,17 @@ while true; do
     case $action in
         "Start")
             # Schedule tasks
-            (sleep 60; play -q $work_music_file) &
+            (sleep 1500; play -q $work_music_file) &
             play_pid=$!  # Save the PID of the play command
-            show_countdown 60 "Time remaining"
+            show_countdown 1500 "Time remaining"
             if [ $? -ne 0 ]; then  # If the countdown was cancelled
                 kill $play_pid  # Kill the play command
                 continue  # Skip the rest of the loop and return to the main dialog
             fi
             zenity --info --text="Break time! Take a 5-minute break."
-            (sleep 60; play -q $break_music_file) &
+            (sleep 300; play -q $break_music_file) &
             play_pid=$!  # Save the PID of the play command
-            show_countdown 60 "Break time remaining"
+            show_countdown 300 "Break time remaining"
             if [ $? -ne 0 ]; then  # If the countdown was cancelled
                 kill $play_pid  # Kill the play command
             fi
