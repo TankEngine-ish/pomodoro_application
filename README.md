@@ -1,13 +1,13 @@
 # Pomodoro_Application
 
-This repository contains a simple Pomodoro timer implemented as a Bash script. The script uses Zenity for GUI dialogs and SoX to play an audio file when the work timer ends.
+This repository contains a simple Pomodoro timer implemented as a Bash script. The script uses Zenity for GUI dialogs and SoX to play an audio file when the work timer ends. Why did I decide to do that? I don't know.
 
 ## Dependencies
 The script has the following dependencies:
 
-Bash
-Zenity
-SoX (for the play command)
+Bash,
+Zenity,
+SoX (for the play command).
 On a Debian-based Linux distribution, you can install these dependencies with the following command:
 
 ```
