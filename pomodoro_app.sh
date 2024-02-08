@@ -15,6 +15,7 @@ show_countdown() {
     done
     echo 100
     ) | zenity --progress --auto-close
+    return $?  # Return the exit status of zenity
 }
 
 # Function to kill any running play commands when the script exits so you don't hear any music after the script is done
@@ -34,7 +35,12 @@ while true; do
         "Start")
             # Schedule tasks
             (sleep 40; play -q $music_file fade 5) &
+            play_pid=$!  # Save the PID of the play command
             show_countdown 60 "Time remaining"
+            if [ $? -ne 0 ]; then  # If the countdown was cancelled
+                kill $play_pid  # Kill the play command
+                continue  # Skip the rest of the loop and return to the main dialog
+            fi
             zenity --info --text="Break time! Take a 5-minute break."
             show_countdown 300 "Break time remaining"
             ;;
