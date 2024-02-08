@@ -34,7 +34,7 @@ You can cancel the work timer at any time by closing the progress dialog. If you
 ## Customization
 You can customize the script by editing the following variables at the top of the script:
 
-music_file: The path to the audio file that will be played when the work timer ends. This should be a file in a format that SoX can play (such as .mp3 or .wav). In my case it's a short soundtrack from a very early expansion of World of Warcraft.
+work_music_file & break_music_file: The paths to the audio files that will be played when the work timer and the break timer end. This should be a file in a format that SoX can play (such as .mp3 or .wav). In my case it's a short soundtrack from a very early expansion of World of Warcraft.
 
 work_duration: The length of the work timer, in seconds. The default is 1500 seconds (25 minutes).
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Initialize variables
-music_file="/home/plamen/Pomodoro_Application/assets/Stormwind.mp3"  # Replace with the path to your music file
-
+work_music_file="/home/plamen/Pomodoro_Application/assets/Stormwind.mp3"  # Replace with the path to your music file
+break_music_file="/home/plamen/Pomodoro_Application/assets/Stormwind_2.mp3"  # Replace with the path to your break music file
 # Function to show a countdown timer
 show_countdown() {
     local duration=$1
@@ -34,15 +34,20 @@ while true; do
     case $action in
         "Start")
             # Schedule tasks
-            (sleep 1500; play -q $music_file fade 5) &
+            (sleep 60; play -q $work_music_file) &
             play_pid=$!  # Save the PID of the play command
-            show_countdown 1500 "Time remaining"
+            show_countdown 60 "Time remaining"
             if [ $? -ne 0 ]; then  # If the countdown was cancelled
                 kill $play_pid  # Kill the play command
                 continue  # Skip the rest of the loop and return to the main dialog
             fi
             zenity --info --text="Break time! Take a 5-minute break."
-            show_countdown 300 "Break time remaining"
+            (sleep 60; play -q $break_music_file) &
+            play_pid=$!  # Save the PID of the play command
+            show_countdown 60 "Break time remaining"
+            if [ $? -ne 0 ]; then  # If the countdown was cancelled
+                kill $play_pid  # Kill the play command
+            fi
             ;;
         "Exit")
             # Exit the application
