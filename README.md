@@ -2,9 +2,7 @@
 
 This repository contains a simple Pomodoro timer implemented as a Bash script. The script uses Zenity for GUI dialogs and SoX to play an audio file when the work timer ends. Why did I decide to do that? I don't know.
 
-![alt text](<assets/Screenshot from 2024-02-08 23-23-40.png>)
-
-![alt text](<assets/Screenshot from 2024-02-08 23-24-07.png>)
+![alt text](<assets/Screenshot from 2024-02-08 23-23-40.png>) ![alt text](<assets/Screenshot from 2024-02-08 23-24-07.png>)
 
 ## Dependencies
 The script has the following dependencies:
