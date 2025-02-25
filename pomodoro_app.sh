@@ -23,34 +23,32 @@ trap 'pkill -f "play -q $music_file"' EXIT
 
 # Main loop
 while true; do
-    # Shows main dialog box
     action=$(zenity --list --title="Pomodoro Timer" --column="Actions" "Start" "Exit")
 
-    # Check if the dialog was closed
+
     if [ $? -ne 0 ]; then
         exit 0
     fi
 
     case $action in
         "Start")
-            # Schedule tasks
             (sleep 1500; play -q $work_music_file) &
-            play_pid=$!  # Save the PID of the play command
+            play_pid=$!  
             show_countdown 1500 "Time remaining"
-            if [ $? -ne 0 ]; then  # If the countdown was cancelled
-                kill $play_pid  # Kill the play command
-                continue  # Skip the rest of the loop and return to the main dialog
+            if [ $? -ne 0 ]; then  
+                kill $play_pid  
+                continue  
             fi
             zenity --info --text="Break time! Take a 5-minute break."
             (sleep 300; play -q $break_music_file) &
-            play_pid=$!  # Save the PID of the play command
+            play_pid=$!  
             show_countdown 300 "Break time remaining"
-            if [ $? -ne 0 ]; then  # If the countdown was cancelled
-                kill $play_pid  # Kill the play command
+            if [ $? -ne 0 ]; then  
+                kill $play_pid  
             fi
             ;;
         "Exit")
-            # Exit the application
+           
             exit 0
             ;;
     esac
