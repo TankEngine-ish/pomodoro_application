@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Initialize variables
-work_music_file="/home/plamen/Pomodoro_Application/assets/Stormwind.mp3"  # Replace with the path to your music file
-break_music_file="/home/plamen/Pomodoro_Application/assets/Stormwind_2.mp3"  # Replace with the path to your break music file
-# Function to show a countdown timer
+work_music_file="/home/plamen/Pomodoro_Application/assets/Stormwind.mp3"  # this is the path to your tune
+break_music_file="/home/plamen/Pomodoro_Application/assets/Stormwind_2.mp3"  # and this is the path to your break tune
+
 show_countdown() {
     local duration=$1
     local text=$2
@@ -18,10 +17,9 @@ show_countdown() {
     return $?  
 }
 
-# Function to kill any running play commands when the script exits so you don't hear any music after the script is done
+# this kill command finishes any running play commands when the script exits so you don't hear any music after the script is done
 trap 'pkill -f "play -q $music_file"' EXIT
 
-# Main loop
 while true; do
     action=$(zenity --list --title="Pomodoro Timer" --column="Actions" "Start" "Exit")
 
